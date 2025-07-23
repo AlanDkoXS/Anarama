@@ -50,3 +50,6 @@ Desktop.ini
 *.njsproj
 *.sln
 *.sw?
+
+# Kiro IDE files
+.kiro/
