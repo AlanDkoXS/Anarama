@@ -1,0 +1,387 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { useTranslations } from '@/i18n/utils';
+
+const t = useTranslations('es');
+---
+
+<Layout 
+  title={t('about.title')}
+  description={t('meta.about.description')}
+>
+  <!-- Hero Section -->
+  <section class="page-hero">
+    <div class="hero-content">
+      <h1 class="hero-title">{t('about.title')}</h1>
+      <p class="hero-subtitle">Conoce nuestra historia, misión y la fundadora que hace posible la magia de los títeres educativos</p>
+    </div>
+  </section>
+
+  <!-- Founder Section -->
+  <section class="founder-section">
+    <div class="section-container">
+      <div class="founder-content">
+        <div class="founder-image">
+          <div class="founder-placeholder">👩‍🎭</div>
+        </div>
+        <div class="founder-info">
+          <h2 class="section-title">{t('about.founder.title')}</h2>
+          <h3 class="founder-name">{t('about.founder.name')}</h3>
+          <p class="founder-description">{t('about.founder.description')}</p>
+          <div class="founder-highlights">
+            <div class="highlight-item">
+              <strong>Especialidad:</strong> Teatro educativo para niños
+            </div>
+            <div class="highlight-item">
+              <strong>Experiencia:</strong> Más de 10 años trabajando con comunidades vulnerables
+            </div>
+            <div class="highlight-item">
+              <strong>Ubicación:</strong> {t('contact.location')}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="mission-section">
+    <div class="section-container">
+      <h2 class="section-title">{t('about.mission.title')}</h2>
+      <div class="mission-content">
+        <p class="mission-description">{t('about.mission.description')}</p>
+        <div class="mission-goals">
+          <div class="goal-card">
+            <div class="goal-icon">🎯</div>
+            <h3>Educación Inclusiva</h3>
+            <p>Llevamos espectáculos educativos a niños en situación de vulnerabilidad, promoviendo la igualdad de oportunidades en el acceso a la cultura y educación.</p>
+          </div>
+          <div class="goal-card">
+            <div class="goal-icon">🌟</div>
+            <h3>Desarrollo Integral</h3>
+            <p>Fomentamos el desarrollo emocional, social y cognitivo de los niños a través de historias que enseñan valores y habilidades para la vida.</p>
+          </div>
+          <div class="goal-card">
+            <div class="goal-icon">🤝</div>
+            <h3>Impacto Comunitario</h3>
+            <p>Trabajamos directamente con comunidades para crear experiencias significativas que fortalezcan los lazos sociales y promuevan el cambio positivo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vision Section -->
+  <section class="vision-section">
+    <div class="section-container">
+      <h2 class="section-title">{t('about.vision.title')}</h2>
+      <p class="section-description">{t('about.vision.description')}</p>
+      <div class="vision-stats">
+        <div class="stat-item">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">Niños alcanzados</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">Presentaciones realizadas</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">10+</div>
+          <div class="stat-label">Comunidades visitadas</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">5+</div>
+          <div class="stat-label">Años de experiencia</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="values-section">
+    <div class="section-container">
+      <h2 class="section-title">{t('about.values.title')}</h2>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">📚</div>
+          <h3>{t('about.values.education')}</h3>
+          <p>{t('about.values.education.desc')}</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🤗</div>
+          <h3>{t('about.values.inclusion')}</h3>
+          <p>{t('about.values.inclusion.desc')}</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🎨</div>
+          <h3>{t('about.values.creativity')}</h3>
+          <p>{t('about.values.creativity.desc')}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="section-container">
+      <h2>¿Quieres conocer más sobre nuestros espectáculos?</h2>
+      <p>Descubre cómo podemos llevar la magia del teatro educativo a tu comunidad o institución.</p>
+      <div class="cta-actions">
+        <a href="/es/servicios" class="cta-button primary">{t('nav.services')}</a>
+        <a href="/es/contacto" class="cta-button secondary">{t('nav.contact')}</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  @import "../../styles/pages.css";
+
+  /* Page-specific styles */
+  .page-hero {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    color: white;
+    padding: 4rem 0;
+    margin: 0 -1rem 3rem -1rem;
+    text-align: center;
+  }
+
+  .page-hero .hero-subtitle {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.125rem;
+    opacity: 0.9;
+  }
+
+  /* Founder Section */
+  .founder-section {
+    padding: 4rem 0;
+  }
+
+  .founder-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .founder-image {
+    text-align: center;
+  }
+
+  .founder-placeholder {
+    font-size: 8rem;
+    background: var(--bg-secondary);
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .founder-name {
+    font-size: 1.5rem;
+    color: var(--color-secondary);
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  .founder-description {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: var(--text-secondary);
+  }
+
+  .founder-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .highlight-item {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--bg-secondary);
+  }
+
+  /* Mission Section */
+  .mission-section {
+    padding: 4rem 0;
+    background: var(--bg-secondary);
+  }
+
+  .mission-description {
+    font-size: 1.125rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--text-secondary);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .mission-goals {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .goal-card {
+    background: var(--bg-primary);
+    padding: 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .goal-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .goal-card h3 {
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+  }
+
+  /* Vision Section */
+  .vision-section {
+    padding: 4rem 0;
+  }
+
+  .vision-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .stat-item {
+    text-align: center;
+    padding: 2rem;
+    background: var(--bg-secondary);
+    border-radius: 1rem;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  /* Values Section */
+  .values-section {
+    padding: 4rem 0;
+    background: var(--bg-secondary);
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .value-card {
+    background: var(--bg-primary);
+    padding: 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .value-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .value-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .value-card h3 {
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    padding: 4rem 0;
+    background: var(--color-primary);
+    color: white;
+    text-align: center;
+    margin: 0 -1rem;
+  }
+
+  .cta-section h2 {
+    color: white;
+    margin-bottom: 1rem;
+  }
+
+  .cta-section p {
+    font-size: 1.125rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+  }
+
+  .cta-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  /* Tablet styles */
+  @media (min-width: 768px) {
+    .page-hero {
+      margin: 0 -2rem 3rem -2rem;
+    }
+
+    .founder-content {
+      grid-template-columns: 1fr 2fr;
+    }
+
+    .mission-goals {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .vision-stats {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .values-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .cta-actions {
+      flex-direction: row;
+      justify-content: center;
+    }
+
+    .cta-section {
+      margin: 0 -2rem;
+    }
+  }
+
+  /* Desktop styles */
+  @media (min-width: 1024px) {
+    .page-hero {
+      margin: 0 -3rem 4rem -3rem;
+    }
+
+    .cta-section {
+      margin: 0 -3rem;
+    }
+  }
+</style>

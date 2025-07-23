@@ -1,0 +1,18 @@
+---
+import { getLangFromUrl, getLocalizedPath, type RouteKey } from '@/i18n/utils';
+
+interface Props {
+  href: RouteKey;
+  class?: string;
+  'aria-current'?: 'page' | 'step' | 'location' | 'date' | 'time' | boolean | undefined;
+  [key: string]: any;
+}
+
+const { href, class: className, 'aria-current': ariaCurrent, ...rest } = Astro.props;
+const currentLang = getLangFromUrl(Astro.url);
+const localizedHref = getLocalizedPath(currentLang, href);
+---
+
+<a href={localizedHref} class={className} aria-current={ariaCurrent} {...rest}>
+  <slot />
+</a>

@@ -1,0 +1,518 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { useTranslations } from '@/i18n/utils';
+
+const t = useTranslations('es');
+---
+
+<Layout 
+  title={t('contact.title')}
+  description={t('meta.contact.description')}
+>
+  <!-- Hero Section -->
+  <section class="page-hero">
+    <div class="hero-content">
+      <h1 class="hero-title">{t('contact.title')}</h1>
+      <p class="hero-subtitle">{t('contact.subtitle')}</p>
+    </div>
+  </section>
+
+  <!-- Contact Information Section -->
+  <section class="contact-info-section">
+    <div class="section-container">
+      <div class="contact-grid">
+        <!-- Contact Information -->
+        <div class="contact-info-card">
+          <h2 class="section-title">{t('contact.info.title')}</h2>
+          
+          <div class="contact-items">
+            <div class="contact-item">
+              <div class="contact-icon">📍</div>
+              <div class="contact-details">
+                <h4>{t('contact.info.address')}</h4>
+                <p>{t('contact.location')}</p>
+                <p>México</p>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon">📞</div>
+              <div class="contact-details">
+                <h4>{t('contact.info.phone')}</h4>
+                <p>+52 (614) 123-4567</p>
+                <p>+52 (614) 987-6543</p>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon">✉️</div>
+              <div class="contact-details">
+                <h4>{t('contact.info.email')}</h4>
+                <p>info@anarama.com</p>
+                <p>contacto@anarama.com</p>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon">🕒</div>
+              <div class="contact-details">
+                <h4>{t('contact.info.hours')}</h4>
+                <p>Lunes a Viernes: 9:00 AM - 6:00 PM</p>
+                <p>Sábados: 10:00 AM - 2:00 PM</p>
+                <p>Domingos: Cerrado</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Media Links -->
+          <div class="social-links">
+            <h4>Síguenos en redes sociales</h4>
+            <div class="social-icons">
+              <a href="#" class="social-link" aria-label="Facebook">
+                <span class="social-icon">📘</span>
+                Facebook
+              </a>
+              <a href="#" class="social-link" aria-label="Instagram">
+                <span class="social-icon">📷</span>
+                Instagram
+              </a>
+              <a href="#" class="social-link" aria-label="YouTube">
+                <span class="social-icon">📺</span>
+                YouTube
+              </a>
+              <a href="#" class="social-link" aria-label="WhatsApp">
+                <span class="social-icon">💬</span>
+                WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form-card">
+          <h2 class="section-title">{t('contact.form.title')}</h2>
+          
+          <form class="contact-form" action="#" method="post">
+            <div class="form-group">
+              <label for="name" class="form-label">
+                {t('contact.form.name')} <span class="required">*</span>
+              </label>
+              <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                class="form-input" 
+                required 
+                placeholder="Tu nombre completo"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="form-label">
+                {t('contact.form.email')} <span class="required">*</span>
+              </label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                class="form-input" 
+                required 
+                placeholder="tu@email.com"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="phone" class="form-label">
+                {t('contact.form.phone')}
+              </label>
+              <input 
+                type="tel" 
+                id="phone" 
+                name="phone" 
+                class="form-input" 
+                placeholder="+52 (614) 123-4567"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="subject" class="form-label">
+                {t('contact.form.subject')} <span class="required">*</span>
+              </label>
+              <select id="subject" name="subject" class="form-select" required>
+                <option value="">Selecciona un tema</option>
+                <option value="booking">Solicitud de espectáculo</option>
+                <option value="workshop">Taller de títeres</option>
+                <option value="collaboration">Colaboración</option>
+                <option value="information">Información general</option>
+                <option value="other">Otro</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message" class="form-label">
+                {t('contact.form.message')} <span class="required">*</span>
+              </label>
+              <textarea 
+                id="message" 
+                name="message" 
+                class="form-textarea" 
+                rows="5" 
+                required 
+                placeholder="Cuéntanos sobre tu proyecto, evento o consulta..."
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="checkbox-label">
+                <input type="checkbox" name="newsletter" class="form-checkbox" />
+                <span class="checkbox-text">
+                  Quiero recibir información sobre nuevos espectáculos y eventos
+                </span>
+              </label>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="cta-button primary">
+                {t('contact.form.submit')}
+              </button>
+              <p class="form-note">
+                <span class="required">*</span> {t('contact.form.required')}
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Additional Information Section -->
+  <section class="additional-info-section">
+    <div class="section-container">
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-icon">🎭</div>
+          <h3>Reservas de Espectáculos</h3>
+          <p>Contáctanos con al menos 2 semanas de anticipación para garantizar disponibilidad. Ofrecemos descuentos especiales para instituciones educativas y organizaciones sin fines de lucro.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">🚐</div>
+          <h3>Área de Cobertura</h3>
+          <p>Atendemos principalmente el estado de Chihuahua y estados vecinos. Para eventos fuera de esta área, consulta sobre costos adicionales de traslado.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">💰</div>
+          <h3>Presupuestos</h3>
+          <p>Todos nuestros presupuestos son gratuitos y personalizados. Los precios varían según la duración, tipo de espectáculo y ubicación del evento.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">🤝</div>
+          <h3>Colaboraciones</h3>
+          <p>Estamos abiertos a colaboraciones con otras organizaciones artísticas, educativas y sociales que compartan nuestra misión de educación inclusiva.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <div class="section-container">
+      <h2 class="section-title">Preguntas Frecuentes</h2>
+      
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h4 class="faq-question">¿Cuánto tiempo duran los espectáculos?</h4>
+          <p class="faq-answer">Nuestros espectáculos tienen una duración flexible de 30 a 60 minutos, adaptándose a las necesidades de cada evento y la edad del público.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4 class="faq-question">¿Qué necesitamos proporcionar para el espectáculo?</h4>
+          <p class="faq-answer">Solo necesitamos un espacio adecuado para la presentación y acceso a electricidad. Nosotros llevamos todos los títeres, escenografía y equipo de sonido necesario.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4 class="faq-question">¿Trabajan con niños de todas las edades?</h4>
+          <p class="faq-answer">Sí, adaptamos nuestros espectáculos para diferentes grupos de edad, desde preescolar hasta adolescentes, ajustando el contenido y la interacción según corresponda.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4 class="faq-question">¿Ofrecen descuentos para escuelas públicas?</h4>
+          <p class="faq-answer">Sí, tenemos tarifas especiales para instituciones educativas públicas y organizaciones sin fines de lucro como parte de nuestro compromiso social.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4 class="faq-question">¿Pueden crear un espectáculo personalizado?</h4>
+          <p class="faq-answer">Absolutamente. Podemos desarrollar contenido específico para abordar temas particulares o celebrar eventos especiales de tu organización.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4 class="faq-question">¿Qué medidas de seguridad implementan?</h4>
+          <p class="faq-answer">Seguimos todos los protocolos de seguridad necesarios y podemos adaptar nuestras presentaciones a cualquier requerimiento específico de salud y seguridad.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  @import "../../styles/pages.css";
+
+  /* Contact-specific styles */
+  .contact-info-section {
+    padding: 4rem 0;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .contact-info-card,
+  .contact-form-card {
+    background: var(--bg-primary);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .contact-items {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .contact-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .contact-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .contact-details h4 {
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.125rem;
+  }
+
+  .contact-details p {
+    color: var(--text-secondary);
+    margin: 0.25rem 0;
+  }
+
+  /* Social Links */
+  .social-links {
+    border-top: 1px solid var(--bg-secondary);
+    padding-top: 2rem;
+  }
+
+  .social-links h4 {
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+  }
+
+  .social-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--bg-secondary);
+    border-radius: 0.5rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+  }
+
+  .social-link:hover {
+    background: var(--color-primary);
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  .social-icon {
+    font-size: 1.25rem;
+  }
+
+  /* Contact Form */
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-label {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .required {
+    color: var(--color-secondary);
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    padding: 0.75rem;
+    border: 2px solid var(--bg-secondary);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: border-color 0.3s ease;
+  }
+
+  .form-input:focus,
+  .form-select:focus,
+  .form-textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    cursor: pointer;
+  }
+
+  .form-checkbox {
+    margin-top: 0.25rem;
+  }
+
+  .checkbox-text {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+  .form-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .form-note {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin: 0;
+  }
+
+  /* Additional Info Section */
+  .additional-info-section {
+    padding: 4rem 0;
+    background: var(--bg-secondary);
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .info-card {
+    background: var(--bg-primary);
+    padding: 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .info-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .info-card h3 {
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+  }
+
+  .info-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* FAQ Section */
+  .faq-section {
+    padding: 4rem 0;
+  }
+
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .faq-item {
+    background: var(--bg-secondary);
+    padding: 2rem;
+    border-radius: 1rem;
+    border-left: 4px solid var(--color-accent);
+  }
+
+  .faq-question {
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+  }
+
+  .faq-answer {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Tablet styles */
+  @media (min-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .info-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .faq-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .form-actions {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  /* Desktop styles */
+  @media (min-width: 1024px) {
+    .info-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>

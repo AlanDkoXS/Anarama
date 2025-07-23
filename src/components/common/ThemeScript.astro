@@ -1,0 +1,78 @@
+---
+// Inline script to initialize theme before page renders
+// This prevents flash of unstyled content (FOUC)
+---
+
+<script is:inline>
+  // Theme initialization script - runs immediately
+  (function() {
+    function getStoredTheme() {
+      try {
+        return localStorage.getItem('theme-preference') || 'auto';
+      } catch {
+        return 'auto';
+      }
+    }
+    
+    function getSystemTheme() {
+      if (typeof window !== 'undefined' && window.matchMedia) {
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+          return 'light';
+        }
+      }
+      return null;
+    }
+    
+    function getTimezoneTheme() {
+      const hour = new Date().getHours();
+      return (hour >= 6 && hour < 18) ? 'light' : 'dark';
+    }
+    
+    function getEffectiveTheme(preference) {
+      switch (preference) {
+        case 'light':
+          return 'light';
+        case 'dark':
+          return 'dark';
+        case 'auto': {
+          const systemTheme = getSystemTheme();
+          return systemTheme || getTimezoneTheme();
+        }
+        default:
+          return 'light';
+      }
+    }
+    
+    function applyTheme() {
+      const preference = getStoredTheme();
+      const effectiveTheme = getEffectiveTheme(preference);
+      
+      if (effectiveTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+      }
+      
+      // Store the effective theme for later use
+      try {
+        sessionStorage.setItem('effective-theme', effectiveTheme);
+      } catch {
+        // Ignore storage errors
+      }
+    }
+    
+    // Apply theme immediately
+    applyTheme();
+    
+    // Listen for storage changes (for cross-tab synchronization)
+    if (typeof window !== 'undefined') {
+      window.addEventListener('storage', function(event) {
+        if (event.key === 'theme-preference') {
+          applyTheme();
+        }
+      });
+    }
+  })();
+</script>

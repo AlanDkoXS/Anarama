@@ -1,0 +1,48 @@
+---
+// Language detection component that runs on the client side
+// This component handles automatic browser language detection and redirection
+---
+
+<script>
+  // Language detection and redirection logic
+  function detectAndRedirectLanguage(): void {
+    // Only run on the root path without language prefix
+    if (window.location.pathname !== '/') {
+      return;
+    }
+
+    // Get browser language preference
+    const browserLang = navigator.language?.split('-')[0] || 'es'; // Get primary language code
+    const supportedLanguages: string[] = ['es', 'en'];
+    const defaultLanguage = 'es'; // Spanish as default for Mexican company
+
+    // Determine target language
+    let targetLang: string = defaultLanguage;
+    
+    if (supportedLanguages.includes(browserLang)) {
+      targetLang = browserLang;
+    } else {
+      // Fallback logic: if not supported, use Spanish as default
+      targetLang = defaultLanguage;
+    }
+
+    // Check if user has a stored language preference
+    const storedLang = localStorage.getItem('preferred-language');
+    if (storedLang && supportedLanguages.includes(storedLang)) {
+      targetLang = storedLang;
+    }
+
+    // Redirect to the appropriate language version
+    const newPath = `/${targetLang}/`;
+    if (window.location.pathname !== newPath) {
+      window.location.replace(newPath);
+    }
+  }
+
+  // Run detection when DOM is loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', detectAndRedirectLanguage);
+  } else {
+    detectAndRedirectLanguage();
+  }
+</script>

@@ -1,0 +1,77 @@
+---
+// Component to test view transitions functionality
+---
+
+<script>
+  function testViewTransitions(): void {
+    // Test if View Transitions API is supported
+    const supportsViewTransitions = 'startViewTransition' in document;
+    
+    console.log('View Transitions API supported:', supportsViewTransitions);
+    
+    if (supportsViewTransitions) {
+      console.log('✅ View transitions are enabled');
+      
+      // Test transition between pages
+      const testTransition = () => {
+        console.log('🔄 Testing view transition...');
+        
+        if (document.startViewTransition) {
+          const transition = document.startViewTransition(() => {
+            console.log('📄 View transition callback executed');
+          });
+          
+          transition.ready.then(() => {
+            console.log('✨ View transition ready');
+          });
+          
+          transition.finished.then(() => {
+            console.log('🎉 View transition finished');
+          });
+        }
+      };
+      
+      // Add test button for development
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        const testButton = document.createElement('button');
+        testButton.textContent = 'Test Transition';
+        testButton.style.cssText = `
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          z-index: 9999;
+          padding: 10px;
+          background: var(--color-accent);
+          color: var(--color-primary);
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-weight: 600;
+        `;
+        testButton.addEventListener('click', testTransition);
+        document.body.appendChild(testButton);
+      }
+    } else {
+      console.log('❌ View transitions not supported, using fallbacks');
+    }
+    
+    // Test transition names
+    const elementsWithTransitions = document.querySelectorAll('[style*="view-transition-name"]');
+    console.log(`🏷️ Found ${elementsWithTransitions.length} elements with view-transition-name`);
+    
+    elementsWithTransitions.forEach((element, index) => {
+      const transitionName = (element as HTMLElement).style.viewTransitionName;
+      console.log(`  ${index + 1}. ${element.tagName.toLowerCase()}.${element.className} -> ${transitionName}`);
+    });
+  }
+
+  // Run tests on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', testViewTransitions);
+  } else {
+    testViewTransitions();
+  }
+
+  // Re-run tests after view transitions
+  document.addEventListener('astro:after-swap', testViewTransitions);
+</script>

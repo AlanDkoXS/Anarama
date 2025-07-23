@@ -1,8 +1,136 @@
 ---
-import Welcome from '../../components/Welcome.astro';
 import Layout from '../../layouts/Layout.astro';
+import { useTranslations } from '@/i18n/utils';
+
+const t = useTranslations('en');
 ---
 
-<Layout>
-	<Welcome />
+<Layout 
+  title={t('home.hero.title')}
+  description={t('meta.home.description')}
+>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">{t('home.hero.title')}</h1>
+      <p class="hero-subtitle">{t('home.hero.subtitle')}</p>
+      <div class="hero-actions">
+        <a href="/en/services" class="cta-button primary">{t('home.hero.cta')}</a>
+        <a href="/en/about" class="cta-button secondary">{t('common.more')}</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="puppet-illustration">🎭</div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section">
+    <div class="section-container">
+      <h2 class="section-title">{t('home.about.title')}</h2>
+      <p class="section-description">{t('home.about.description')}</p>
+      <div class="about-highlights">
+        <div class="highlight-card">
+          <div class="highlight-icon">🎪</div>
+          <h3>{t('about.values.education')}</h3>
+          <p>{t('about.values.education.desc')}</p>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon">🤝</div>
+          <h3>{t('about.values.inclusion')}</h3>
+          <p>{t('about.values.inclusion.desc')}</p>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon">✨</div>
+          <h3>{t('about.values.creativity')}</h3>
+          <p>{t('about.values.creativity.desc')}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services-section">
+    <div class="section-container">
+      <h2 class="section-title">{t('home.services.title')}</h2>
+      <p class="section-description">{t('home.services.description')}</p>
+      <div class="services-grid">
+        <div class="service-card">
+          <h3>{t('services.educational.title')}</h3>
+          <p>{t('services.educational.description')}</p>
+        </div>
+        <div class="service-card">
+          <h3>{t('services.interactive.title')}</h3>
+          <p>{t('services.interactive.description')}</p>
+        </div>
+        <div class="service-card">
+          <h3>{t('services.workshops.title')}</h3>
+          <p>{t('services.workshops.description')}</p>
+        </div>
+      </div>
+      <div class="services-cta">
+        <a href="/en/services" class="cta-button primary">{t('nav.services')}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="section-container">
+      <h2 class="section-title">{t('home.contact.title')}</h2>
+      <p class="section-description">{t('home.contact.description')}</p>
+      <div class="contact-info">
+        <div class="contact-item">
+          <strong>{t('contact.location')}</strong>
+        </div>
+        <div class="contact-actions">
+          <a href="/en/contact" class="cta-button primary">{t('nav.contact')}</a>
+          <a href="/en/gallery" class="cta-button secondary">{t('nav.gallery')}</a>
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>
+
+<style>
+  @import "../../styles/pages.css";
+</style>
+
+<style>
+  .hero {
+    text-align: center;
+    padding: var(--space-3xl) 0;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    color: white;
+    margin: 0 calc(-1 * var(--space-md));
+    margin-bottom: var(--space-2xl);
+  }
+  
+  .hero h1 {
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--space-md);
+    color: white;
+  }
+  
+  .hero p {
+    font-size: var(--font-size-lg);
+    opacity: 0.9;
+  }
+  
+  .content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  @media (min-width: 768px) {
+    .hero {
+      margin: 0 calc(-1 * var(--space-lg));
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .hero {
+      margin: 0 calc(-1 * var(--space-xl));
+    }
+  }
+</style>

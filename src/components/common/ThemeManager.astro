@@ -1,0 +1,252 @@
+---
+// ThemeManager component for theme detection and switching
+// Handles system preference detection, timezone-based theme selection, and persistence
+---
+
+<script>
+  // Import types
+  type ThemeMode = 'light' | 'dark' | 'auto';
+  type EffectiveTheme = 'light' | 'dark';
+
+  // Theme management functionality
+  class ThemeManager {
+    private currentTheme: ThemeMode = 'auto';
+    
+    constructor() {
+      this.init();
+    }
+    
+    private init(): void {
+      // Load saved theme preference
+      const savedTheme = localStorage.getItem('theme-preference') as ThemeMode | null;
+      this.currentTheme = savedTheme || 'auto';
+      
+      // No need to store system theme as it's detected when needed
+      
+      // Apply initial theme
+      this.applyTheme();
+      
+      // Listen for system theme changes
+      this.setupSystemThemeListener();
+      
+      // Setup theme toggle buttons
+      this.setupThemeToggles();
+    }
+    
+
+    
+    private getTimezoneBasedTheme(): EffectiveTheme {
+      const hour = new Date().getHours();
+      // Consider 6 AM to 6 PM as day time (light theme)
+      // 6 PM to 6 AM as night time (dark theme)
+      return (hour >= 6 && hour < 18) ? 'light' : 'dark';
+    }
+    
+    private getEffectiveTheme(): EffectiveTheme {
+      switch (this.currentTheme) {
+        case 'light':
+          return 'light';
+        case 'dark':
+          return 'dark';
+        case 'auto':
+          // First try system preference, then fall back to timezone
+          if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            return 'dark';
+          } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+            return 'light';
+          } else {
+            // No system preference detected, use timezone
+            return this.getTimezoneBasedTheme();
+          }
+        default:
+          return 'light';
+      }
+    }
+    
+    private applyTheme(): void {
+      const effectiveTheme = this.getEffectiveTheme();
+      const html = document.documentElement;
+      
+      // Remove existing theme classes
+      html.removeAttribute('data-theme');
+      
+      // Apply new theme
+      if (effectiveTheme === 'dark') {
+        html.setAttribute('data-theme', 'dark');
+      }
+      
+      // Update theme toggle buttons
+      this.updateThemeToggles();
+      
+      // Dispatch theme change event
+      window.dispatchEvent(new CustomEvent('theme-changed', {
+        detail: { theme: effectiveTheme, preference: this.currentTheme }
+      }));
+    }
+    
+    private setupSystemThemeListener(): void {
+      if (window.matchMedia) {
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        mediaQuery.addEventListener('change', () => {
+          if (this.currentTheme === 'auto') {
+            this.applyTheme();
+          }
+        });
+      }
+    }
+    
+    private setupThemeToggles(): void {
+      // Setup theme toggle buttons
+      document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        
+        if (target.matches('[data-theme-toggle]')) {
+          e.preventDefault();
+          const newTheme = target.getAttribute('data-theme-toggle') as ThemeMode;
+          this.setTheme(newTheme);
+        }
+      });
+    }
+    
+    private updateThemeToggles(): void {
+      const toggles = document.querySelectorAll('[data-theme-toggle]');
+      toggles.forEach(toggle => {
+        const themeValue = toggle.getAttribute('data-theme-toggle');
+        if (themeValue === this.currentTheme) {
+          toggle.classList.add('active');
+          toggle.setAttribute('aria-pressed', 'true');
+        } else {
+          toggle.classList.remove('active');
+          toggle.setAttribute('aria-pressed', 'false');
+        }
+      });
+    }
+    
+    public setTheme(theme: ThemeMode): void {
+      this.currentTheme = theme;
+      localStorage.setItem('theme-preference', theme);
+      this.applyTheme();
+    }
+    
+    public getTheme(): ThemeMode {
+      return this.currentTheme;
+    }
+    
+    public getEffectiveThemePublic(): EffectiveTheme {
+      return this.getEffectiveTheme();
+    }
+  }
+  
+  // Initialize theme manager when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      window.themeManager = new ThemeManager();
+    });
+  } else {
+    window.themeManager = new ThemeManager();
+  }
+  
+  // ThemeManager is now available globally via the env.d.ts file
+</script>
+
+<!-- Theme toggle component HTML -->
+<div class="theme-controls" id="theme-controls">
+  <div class="theme-toggle-group" role="group" aria-label="Theme selection">
+    <button 
+      type="button"
+      class="theme-toggle"
+      data-theme-toggle="light"
+      aria-label="Light theme"
+      title="Light theme"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2"/>
+      </svg>
+      <span class="sr-only">Light</span>
+    </button>
+    
+    <button 
+      type="button"
+      class="theme-toggle"
+      data-theme-toggle="dark"
+      aria-label="Dark theme"
+      title="Dark theme"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" fill="currentColor"/>
+      </svg>
+      <span class="sr-only">Dark</span>
+    </button>
+    
+    <button 
+      type="button"
+      class="theme-toggle"
+      data-theme-toggle="auto"
+      aria-label="Auto theme"
+      title="Auto theme (system/time-based)"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="3" width="20" height="14" rx="2" ry="2" stroke="currentColor" stroke-width="2"/>
+        <line x1="8" y1="21" x2="16" y2="21" stroke="currentColor" stroke-width="2"/>
+        <line x1="12" y1="17" x2="12" y2="21" stroke="currentColor" stroke-width="2"/>
+      </svg>
+      <span class="sr-only">Auto</span>
+    </button>
+  </div>
+</div>
+
+<style>
+  .theme-controls {
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .theme-toggle-group {
+    display: inline-flex;
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    padding: var(--space-xs);
+    border: 1px solid var(--border-color);
+    gap: var(--space-xs);
+  }
+  
+  .theme-toggle {
+    background: none;
+    border: none;
+    padding: var(--space-sm);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    min-height: 40px;
+  }
+  
+  .theme-toggle:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+  }
+  
+  .theme-toggle.active {
+    background-color: var(--color-primary);
+    color: white;
+  }
+  
+  .theme-toggle:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+  
+  /* Smooth theme transition */
+  :global(html) {
+    transition: background-color var(--transition-normal);
+  }
+  
+  :global(body) {
+    transition: background-color var(--transition-normal), color var(--transition-normal);
+  }
+</style>

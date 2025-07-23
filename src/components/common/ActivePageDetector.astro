@@ -1,0 +1,38 @@
+---
+import { getCurrentRouteKey, getLangFromUrl } from '@/i18n/utils';
+
+const currentLang = getLangFromUrl(Astro.url);
+const currentRouteKey = getCurrentRouteKey(Astro.url);
+---
+
+<script is:inline define:vars={{ currentRouteKey, currentLang }}>
+  // Set active page information for navigation highlighting
+  function setActivePageInfo() {
+    // Store current page info in data attributes for navigation components
+    document.documentElement.setAttribute('data-current-route', currentRouteKey || 'home');
+    document.documentElement.setAttribute('data-current-lang', currentLang);
+    
+    // Add active class to current navigation items
+    const navLinks = document.querySelectorAll('[data-route-key]');
+    navLinks.forEach((link) => {
+      const linkRouteKey = link.getAttribute('data-route-key');
+      if (linkRouteKey === currentRouteKey) {
+        link.classList.add('active');
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.classList.remove('active');
+        link.removeAttribute('aria-current');
+      }
+    });
+  }
+
+  // Run on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setActivePageInfo);
+  } else {
+    setActivePageInfo();
+  }
+
+  // Re-run after view transitions
+  document.addEventListener('astro:after-swap', setActivePageInfo);
+</script>

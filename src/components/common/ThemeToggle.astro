@@ -1,0 +1,206 @@
+---
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const currentLang = getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+---
+
+<div class="theme-toggle">
+  <button
+    type="button"
+    class="theme-button"
+    aria-label={t('theme.toggle')}
+    data-theme-toggle
+  >
+    <span class="theme-icon light-icon" aria-hidden="true">☀️</span>
+    <span class="theme-icon dark-icon" aria-hidden="true">🌙</span>
+    <span class="theme-icon auto-icon" aria-hidden="true">🌓</span>
+    <span class="theme-text" data-theme-text></span>
+  </button>
+</div>
+
+<script>
+  type ThemeMode = 'light' | 'dark' | 'auto';
+
+  function initThemeToggle(): void {
+    const button = document.querySelector('[data-theme-toggle]');
+    const themeText = document.querySelector('[data-theme-text]');
+    
+    if (!button || !themeText) return;
+
+    // Get current theme
+    function getCurrentTheme(): ThemeMode {
+      return (localStorage.getItem('theme') as ThemeMode) || 'auto';
+    }
+
+    // Set theme
+    function setTheme(theme: ThemeMode): void {
+      localStorage.setItem('theme', theme);
+      updateThemeDisplay(theme);
+      applyTheme(theme);
+    }
+
+    // Update button display
+    function updateThemeDisplay(theme: ThemeMode): void {
+      const button = document.querySelector('[data-theme-toggle]');
+      if (!button || !themeText) return;
+
+      // Remove all theme classes
+      button.classList.remove('theme-light', 'theme-dark', 'theme-auto');
+      
+      // Add current theme class
+      button.classList.add(`theme-${theme}`);
+      
+      // Update text based on current language
+      const lang = document.documentElement.lang || 'es';
+      const themeLabels = {
+        en: { light: 'Light', dark: 'Dark', auto: 'Auto' },
+        es: { light: 'Claro', dark: 'Oscuro', auto: 'Auto' }
+      };
+      
+      const labels = themeLabels[lang as keyof typeof themeLabels] || themeLabels.es;
+      themeText.textContent = labels[theme];
+    }
+
+    // Apply theme to document
+    function applyTheme(theme: ThemeMode): void {
+      const root = document.documentElement;
+      
+      if (theme === 'auto') {
+        // Use system preference or time-based detection
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const isNightTime = isNightBasedOnTimezone();
+        const shouldUseDark = prefersDark || isNightTime;
+        
+        root.setAttribute('data-theme', shouldUseDark ? 'dark' : 'light');
+      } else {
+        root.setAttribute('data-theme', theme);
+      }
+    }
+
+    // Check if it's night time based on timezone
+    function isNightBasedOnTimezone(): boolean {
+      const now = new Date();
+      const hour = now.getHours();
+      return hour < 6 || hour >= 20; // Night time: 8 PM to 6 AM
+    }
+
+    // Cycle through themes
+    function cycleTheme(): void {
+      const current = getCurrentTheme();
+      const themes: ThemeMode[] = ['light', 'dark', 'auto'];
+      const currentIndex = themes.indexOf(current);
+      const nextIndex = (currentIndex + 1) % themes.length;
+      const nextTheme = themes[nextIndex];
+      
+      if (nextTheme) {
+        setTheme(nextTheme);
+      }
+    }
+
+    // Initialize
+    const currentTheme = getCurrentTheme();
+    updateThemeDisplay(currentTheme);
+    applyTheme(currentTheme);
+
+    // Event listeners
+    button.addEventListener('click', cycleTheme);
+
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      if (getCurrentTheme() === 'auto') {
+        applyTheme('auto');
+      }
+    });
+  }
+
+  // Initialize on DOM load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initThemeToggle);
+  } else {
+    initThemeToggle();
+  }
+
+  // Re-initialize after view transitions
+  document.addEventListener('astro:after-swap', initThemeToggle);
+</script>
+
+<style>
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+  }
+
+  .theme-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: transparent;
+    border: 1px solid var(--color-primary);
+    border-radius: 0.375rem;
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 4rem;
+  }
+
+  .theme-button:hover {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .theme-button:focus {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .theme-icon {
+    font-size: 1rem;
+    display: none;
+  }
+
+  .theme-text {
+    font-size: 0.875rem;
+  }
+
+  /* Show appropriate icon based on current theme */
+  .theme-button.theme-light .light-icon {
+    display: inline;
+  }
+
+  .theme-button.theme-dark .dark-icon {
+    display: inline;
+  }
+
+  .theme-button.theme-auto .auto-icon {
+    display: inline;
+  }
+
+  @media (max-width: 768px) {
+    .theme-text {
+      display: none;
+    }
+    
+    .theme-button {
+      padding: 0.5rem;
+      min-width: auto;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .theme-button {
+      border-width: 2px;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .theme-button {
+      transition: none;
+    }
+  }
+</style>

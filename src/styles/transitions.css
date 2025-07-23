@@ -1,0 +1,273 @@
+/* View Transitions Styles */
+
+/* Enable view transitions for supported browsers */
+@view-transition {
+  navigation: auto;
+}
+
+/* Default page transition */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.3s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+::view-transition-old(root) {
+  animation-name: slide-out-to-left;
+}
+
+::view-transition-new(root) {
+  animation-name: slide-in-from-right;
+}
+
+/* Slide animations */
+@keyframes slide-out-to-left {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in-from-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Fade transition for same-page navigation */
+::view-transition-old(fade),
+::view-transition-new(fade) {
+  animation-duration: 0.2s;
+}
+
+::view-transition-old(fade) {
+  animation-name: fade-out;
+}
+
+::view-transition-new(fade) {
+  animation-name: fade-in;
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Hero section transition */
+::view-transition-old(hero),
+::view-transition-new(hero) {
+  animation-duration: 0.4s;
+  animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+::view-transition-old(hero) {
+  animation-name: hero-out;
+}
+
+::view-transition-new(hero) {
+  animation-name: hero-in;
+}
+
+@keyframes hero-out {
+  from {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.95) translateY(-20px);
+    opacity: 0;
+  }
+}
+
+@keyframes hero-in {
+  from {
+    transform: scale(1.05) translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Navigation transition */
+::view-transition-old(navigation),
+::view-transition-new(navigation) {
+  animation-duration: 0.2s;
+}
+
+::view-transition-old(navigation) {
+  animation-name: nav-fade-out;
+}
+
+::view-transition-new(navigation) {
+  animation-name: nav-fade-in;
+}
+
+@keyframes nav-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0.8; }
+}
+
+@keyframes nav-fade-in {
+  from { opacity: 0.8; }
+  to { opacity: 1; }
+}
+
+/* Card grid transitions */
+::view-transition-old(card-grid),
+::view-transition-new(card-grid) {
+  animation-duration: 0.35s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+::view-transition-old(card-grid) {
+  animation-name: cards-out;
+}
+
+::view-transition-new(card-grid) {
+  animation-name: cards-in;
+}
+
+@keyframes cards-out {
+  from {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-10px) scale(0.98);
+    opacity: 0;
+  }
+}
+
+@keyframes cards-in {
+  from {
+    transform: translateY(10px) scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Language switch transition */
+::view-transition-old(lang-switch),
+::view-transition-new(lang-switch) {
+  animation-duration: 0.4s;
+  animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+::view-transition-old(lang-switch) {
+  animation-name: lang-out;
+}
+
+::view-transition-new(lang-switch) {
+  animation-name: lang-in;
+}
+
+@keyframes lang-out {
+  from {
+    transform: translateX(0) rotateY(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-50px) rotateY(-15deg);
+    opacity: 0;
+  }
+}
+
+@keyframes lang-in {
+  from {
+    transform: translateX(50px) rotateY(15deg);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+/* Gallery filter transition */
+::view-transition-old(gallery-filter),
+::view-transition-new(gallery-filter) {
+  animation-duration: 0.25s;
+}
+
+::view-transition-old(gallery-filter) {
+  animation-name: filter-out;
+}
+
+::view-transition-new(gallery-filter) {
+  animation-name: filter-in;
+}
+
+@keyframes filter-out {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+}
+
+@keyframes filter-in {
+  from {
+    transform: scale(1.05);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  ::view-transition-old(fade),
+  ::view-transition-new(fade),
+  ::view-transition-old(hero),
+  ::view-transition-new(hero),
+  ::view-transition-old(navigation),
+  ::view-transition-new(navigation),
+  ::view-transition-old(card-grid),
+  ::view-transition-new(card-grid),
+  ::view-transition-old(lang-switch),
+  ::view-transition-new(lang-switch),
+  ::view-transition-old(gallery-filter),
+  ::view-transition-new(gallery-filter) {
+    animation-duration: 0.01s;
+    animation-name: none;
+  }
+}
+
+/* Fallback for browsers without view transition support */
+@supports not (view-transition-name: none) {
+  /* Add fallback styles if needed */
+  .page-transition-fallback {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+  
+  .page-transition-fallback.loading {
+    opacity: 0.8;
+  }
+}

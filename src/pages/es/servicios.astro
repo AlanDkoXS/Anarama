@@ -1,0 +1,441 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { useTranslations } from '@/i18n/utils';
+
+const t = useTranslations('es');
+---
+
+<Layout 
+  title={t('services.title')}
+  description={t('meta.services.description')}
+>
+  <!-- Hero Section -->
+  <section class="page-hero">
+    <div class="hero-content">
+      <h1 class="hero-title">{t('services.title')}</h1>
+      <p class="hero-subtitle">{t('services.subtitle')}</p>
+    </div>
+  </section>
+
+  <!-- Main Services Section -->
+  <section class="main-services">
+    <div class="section-container">
+      <div class="services-grid">
+        <!-- Educational Shows -->
+        <div class="service-card featured">
+          <div class="service-icon">🎭</div>
+          <h3 class="service-title">{t('services.educational.title')}</h3>
+          <p class="service-description">{t('services.educational.description')}</p>
+          <div class="service-features">
+            <div class="feature-item">✓ Adaptado para diferentes edades</div>
+            <div class="feature-item">✓ Contenido educativo personalizado</div>
+            <div class="feature-item">✓ Duración flexible (30-60 minutos)</div>
+            <div class="feature-item">✓ Materiales didácticos incluidos</div>
+          </div>
+        </div>
+
+        <!-- Interactive Performances -->
+        <div class="service-card featured">
+          <div class="service-icon">🤹</div>
+          <h3 class="service-title">{t('services.interactive.title')}</h3>
+          <p class="service-description">{t('services.interactive.description')}</p>
+          <div class="service-features">
+            <div class="feature-item">✓ Participación activa de los niños</div>
+            <div class="feature-item">✓ Juegos y dinámicas grupales</div>
+            <div class="feature-item">✓ Desarrollo de habilidades sociales</div>
+            <div class="feature-item">✓ Experiencia memorable e inmersiva</div>
+          </div>
+        </div>
+
+        <!-- Puppet Workshops -->
+        <div class="service-card featured">
+          <div class="service-icon">🎨</div>
+          <h3 class="service-title">{t('services.workshops.title')}</h3>
+          <p class="service-description">{t('services.workshops.description')}</p>
+          <div class="service-features">
+            <div class="feature-item">✓ Creación de títeres propios</div>
+            <div class="feature-item">✓ Técnicas básicas de manipulación</div>
+            <div class="feature-item">✓ Fomento de la creatividad</div>
+            <div class="feature-item">✓ Materiales incluidos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Educational Themes Section -->
+  <section class="themes-section">
+    <div class="section-container">
+      <h2 class="section-title">{t('services.themes.title')}</h2>
+      <p class="section-description">Nuestros espectáculos abordan temas fundamentales para el desarrollo integral de los niños</p>
+      
+      <div class="themes-grid">
+        <div class="theme-card">
+          <div class="theme-icon">💝</div>
+          <h4>{t('services.themes.values')}</h4>
+          <p>Historias que enseñan valores como la honestidad, respeto, amistad y solidaridad a través de personajes entrañables.</p>
+        </div>
+        
+        <div class="theme-card">
+          <div class="theme-icon">🌱</div>
+          <h4>{t('services.themes.environment')}</h4>
+          <p>Conciencia ecológica y cuidado del medio ambiente presentados de manera divertida y educativa.</p>
+        </div>
+        
+        <div class="theme-card">
+          <div class="theme-icon">🍎</div>
+          <h4>{t('services.themes.health')}</h4>
+          <p>Hábitos saludables, nutrición adecuada y cuidado personal explicados de forma accesible para los niños.</p>
+        </div>
+        
+        <div class="theme-card">
+          <div class="theme-icon">🛡️</div>
+          <h4>{t('services.themes.safety')}</h4>
+          <p>Prevención de accidentes, seguridad personal y autocuidado presentados sin generar miedo.</p>
+        </div>
+        
+        <div class="theme-card">
+          <div class="theme-icon">🌈</div>
+          <h4>{t('services.themes.diversity')}</h4>
+          <p>Celebración de la diversidad, inclusión y respeto por las diferencias culturales y personales.</p>
+        </div>
+        
+        <div class="theme-card">
+          <div class="theme-icon">📚</div>
+          <h4>Educación y Aprendizaje</h4>
+          <p>Fomento de la lectura, curiosidad científica y amor por el aprendizaje a través de aventuras educativas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Target Audiences Section -->
+  <section class="audiences-section">
+    <div class="section-container">
+      <h2 class="section-title">¿Para quién son nuestros servicios?</h2>
+      <div class="audiences-grid">
+        <div class="audience-card">
+          <div class="audience-icon">🏫</div>
+          <h4>Escuelas y Colegios</h4>
+          <p>Programas educativos que complementan el currículo escolar con experiencias artísticas enriquecedoras.</p>
+        </div>
+        
+        <div class="audience-card">
+          <div class="audience-icon">🏘️</div>
+          <h4>Centros Comunitarios</h4>
+          <p>Espectáculos diseñados para fortalecer los lazos comunitarios y promover valores sociales positivos.</p>
+        </div>
+        
+        <div class="audience-card">
+          <div class="audience-icon">🏥</div>
+          <h4>Hospitales y Clínicas</h4>
+          <p>Presentaciones terapéuticas que brindan alegría y apoyo emocional a niños en tratamiento médico.</p>
+        </div>
+        
+        <div class="audience-card">
+          <div class="audience-icon">📚</div>
+          <h4>Bibliotecas</h4>
+          <p>Actividades que fomentan el amor por la lectura y la literatura infantil de manera interactiva.</p>
+        </div>
+        
+        <div class="audience-card">
+          <div class="audience-icon">🎉</div>
+          <h4>Eventos Especiales</h4>
+          <p>Celebraciones, festivales y eventos corporativos con entretenimiento educativo de calidad.</p>
+        </div>
+        
+        <div class="audience-card">
+          <div class="audience-icon">🤝</div>
+          <h4>ONGs y Fundaciones</h4>
+          <p>Colaboraciones con organizaciones que trabajan con poblaciones vulnerables y en situación de riesgo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section class="process-section">
+    <div class="section-container">
+      <h2 class="section-title">¿Cómo trabajamos?</h2>
+      <div class="process-steps">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h4>Consulta Inicial</h4>
+          <p>Conversamos sobre tus necesidades, objetivos educativos y características del público objetivo.</p>
+        </div>
+        
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h4>Diseño Personalizado</h4>
+          <p>Adaptamos el contenido y formato del espectáculo según los requerimientos específicos de tu evento.</p>
+        </div>
+        
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h4>Preparación</h4>
+          <p>Preparamos todos los materiales, títeres y elementos necesarios para una presentación exitosa.</p>
+        </div>
+        
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h4>Presentación</h4>
+          <p>Realizamos el espectáculo con la más alta calidad artística y compromiso educativo.</p>
+        </div>
+        
+        <div class="step-card">
+          <div class="step-number">5</div>
+          <h4>Seguimiento</h4>
+          <p>Proporcionamos materiales de apoyo y seguimiento para maximizar el impacto educativo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="section-container">
+      <h2>¿Listo para llevar la magia a tu comunidad?</h2>
+      <p>Contáctanos para diseñar una experiencia educativa única y memorable para los niños de tu organización.</p>
+      <div class="cta-actions">
+        <a href="/es/contacto" class="cta-button primary">Solicitar Información</a>
+        <a href="/es/galeria" class="cta-button secondary">Ver Galería</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  @import "../../styles/pages.css";
+
+  /* Services-specific styles */
+  .main-services {
+    padding: 4rem 0;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .service-card.featured {
+    background: var(--bg-primary);
+    border: 2px solid var(--color-accent);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .service-card.featured:hover {
+    transform: translateY(-5px);
+  }
+
+  .service-icon {
+    font-size: 4rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .service-title {
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .service-description {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  .service-features {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .feature-item {
+    color: var(--text-primary);
+    font-weight: 500;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--bg-secondary);
+  }
+
+  /* Themes Section */
+  .themes-section {
+    padding: 4rem 0;
+    background: var(--bg-secondary);
+  }
+
+  .themes-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .theme-card {
+    background: var(--bg-primary);
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .theme-card:hover {
+    transform: translateY(-3px);
+  }
+
+  .theme-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .theme-card h4 {
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  .theme-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  /* Audiences Section */
+  .audiences-section {
+    padding: 4rem 0;
+  }
+
+  .audiences-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .audience-card {
+    background: var(--bg-secondary);
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    border-left: 4px solid var(--color-secondary);
+    transition: all 0.3s ease;
+  }
+
+  .audience-card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .audience-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .audience-card h4 {
+    font-size: 1.125rem;
+    color: var(--color-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  .audience-card p {
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  /* Process Section */
+  .process-section {
+    padding: 4rem 0;
+    background: var(--bg-secondary);
+  }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .step-card {
+    background: var(--bg-primary);
+    padding: 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+
+  .step-number {
+    background: var(--color-primary);
+    color: white;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 auto 1rem auto;
+  }
+
+  .step-card h4 {
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+  }
+
+  .step-card p {
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  /* Tablet styles */
+  @media (min-width: 768px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .services-grid .service-card:first-child {
+      grid-column: 1 / -1;
+    }
+
+    .themes-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .audiences-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .process-steps {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Desktop styles */
+  @media (min-width: 1024px) {
+    .services-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .services-grid .service-card:first-child {
+      grid-column: auto;
+    }
+
+    .themes-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .audiences-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .process-steps {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+</style>

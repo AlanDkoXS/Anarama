@@ -1,0 +1,216 @@
+---
+// View Transitions component for enhanced page transitions
+---
+
+<script>
+  interface ViewTransitionAPI {
+    startViewTransition?: (callback: () => void) => {
+      finished: Promise<void>;
+      ready: Promise<void>;
+      updateCallbackDone: Promise<void>;
+    };
+  }
+
+  declare global {
+    interface Document extends ViewTransitionAPI {}
+  }
+
+  function initViewTransitions(): void {
+    // Check if View Transitions API is supported
+    const supportsViewTransitions = 'startViewTransition' in document;
+    
+    if (!supportsViewTransitions) {
+      // Fallback for browsers without view transition support
+      document.documentElement.classList.add('no-view-transitions');
+      return;
+    }
+
+    // Add view transition names to key elements
+    function addTransitionNames(): void {
+      // Hero sections
+      const heroSections = document.querySelectorAll('.hero, .page-hero');
+      heroSections.forEach((hero, index) => {
+        (hero as HTMLElement).style.viewTransitionName = `hero-${index}`;
+      });
+
+      // Card grids
+      const cardGrids = document.querySelectorAll('.services-grid, .about-highlights, .gallery-grid, .themes-grid');
+      cardGrids.forEach((grid, index) => {
+        (grid as HTMLElement).style.viewTransitionName = `card-grid-${index}`;
+      });
+
+      // Gallery filters
+      const galleryFilters = document.querySelectorAll('.filter-buttons');
+      galleryFilters.forEach((filter, index) => {
+        (filter as HTMLElement).style.viewTransitionName = `gallery-filter-${index}`;
+      });
+    }
+
+    // Handle language switching with special transition
+    function handleLanguageSwitch(): void {
+      const languageButtons = document.querySelectorAll('.language-button');
+      
+      languageButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+          const target = e.target as HTMLElement;
+          const alternateUrl = target.closest('[data-alternate-url]')?.getAttribute('data-alternate-url');
+          
+          if (alternateUrl && supportsViewTransitions) {
+            e.preventDefault();
+            
+            // Add language switch transition name
+            document.documentElement.style.viewTransitionName = 'lang-switch';
+            
+            // Start view transition
+            document.startViewTransition?.(() => {
+              window.location.href = alternateUrl;
+            });
+          }
+        });
+      });
+    }
+
+    // Handle navigation with enhanced transitions
+    function handleNavigation(): void {
+      const navLinks = document.querySelectorAll('a[href^="/"]');
+      
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          const target = e.target as HTMLAnchorElement;
+          const href = target.href;
+          
+          // Skip if it's the current page
+          if (href === window.location.href) {
+            e.preventDefault();
+            return;
+          }
+
+          // Skip if it's an external link or has special attributes
+          if (target.hasAttribute('download') || 
+              target.hasAttribute('target') || 
+              target.protocol !== window.location.protocol) {
+            return;
+          }
+
+          if (supportsViewTransitions) {
+            e.preventDefault();
+            
+            // Determine transition type based on navigation
+            const isLanguageSwitch = href.includes('/en/') !== window.location.href.includes('/en/');
+            const transitionName = isLanguageSwitch ? 'lang-switch' : 'root';
+            
+            document.documentElement.style.viewTransitionName = transitionName;
+            
+            // Start view transition
+            const transition = document.startViewTransition?.(() => {
+              window.location.href = href;
+            });
+
+            // Handle transition completion
+            transition?.finished.catch(() => {
+              // Fallback if transition fails
+              window.location.href = href;
+            });
+          }
+        });
+      });
+    }
+
+    // Handle gallery filtering with transitions
+    function handleGalleryFilters(): void {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          if (supportsViewTransitions) {
+            const galleryGrid = document.querySelector('.gallery-grid');
+            if (galleryGrid) {
+              (galleryGrid as HTMLElement).style.viewTransitionName = 'gallery-filter';
+            }
+          }
+        });
+      });
+    }
+
+    // Initialize transition names and handlers
+    addTransitionNames();
+    handleLanguageSwitch();
+    handleNavigation();
+    handleGalleryFilters();
+
+    // Add loading indicator for transitions
+    function showTransitionLoading(): void {
+      const loadingIndicator = document.createElement('div');
+      loadingIndicator.className = 'transition-loading';
+      loadingIndicator.innerHTML = '<div class="loading-spinner"></div>';
+      document.body.appendChild(loadingIndicator);
+      
+      setTimeout(() => {
+        loadingIndicator.remove();
+      }, 300);
+    }
+
+    // Listen for navigation events
+    window.addEventListener('beforeunload', () => {
+      if (supportsViewTransitions) {
+        showTransitionLoading();
+      }
+    });
+  }
+
+  // Initialize on DOM load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initViewTransitions);
+  } else {
+    initViewTransitions();
+  }
+
+  // Re-initialize after view transitions
+  document.addEventListener('astro:after-swap', initViewTransitions);
+</script>
+
+<style>
+  /* Transition loading indicator */
+  .transition-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    z-index: 10000;
+    animation: loading-bar 0.3s ease-out;
+  }
+
+  @keyframes loading-bar {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  /* Fallback styles for browsers without view transitions */
+  .no-view-transitions a {
+    transition: opacity 0.2s ease;
+  }
+
+  .no-view-transitions a:hover {
+    opacity: 0.8;
+  }
+
+  /* Ensure smooth transitions for theme changes */
+  html[data-theme] {
+    transition: color-scheme 0.3s ease;
+  }
+
+  /* Transition states */
+  .page-transitioning {
+    pointer-events: none;
+  }
+
+  .page-transitioning * {
+    animation-play-state: paused;
+  }
+</style>

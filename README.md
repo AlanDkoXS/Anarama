@@ -1,52 +1,111 @@
-# Astro Starter Kit: Basics
+# Compañía de Títeres Anarama - Website
 
-```sh
-pnpm create astro@latest -- --template basics
+Educational puppet theater company website built with Astro, featuring multilingual support (Spanish/English) and responsive design.
+
+## 🚀 Project Setup
+
+This project **exclusively uses pnpm** as the package manager. Using npm or yarn will be blocked by the preinstall script.
+
+### Prerequisites
+
+- Node.js 18+ 
+- pnpm 8.0.0+ (install with `npm install -g pnpm`)
+
+### Installation
+
+```bash
+# Install dependencies (only pnpm allowed)
+pnpm install
+
+# Start development server
+pnpm run dev
+
+# Build for production
+pnpm run build
+
+# Preview production build
+pnpm run preview
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+### Package Manager Enforcement
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- The project includes a `preinstall` script that blocks npm/yarn usage
+- `.npmrc` is configured for optimal pnpm settings
+- `package.json` specifies pnpm as the required package manager
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## 🌐 Internationalization
 
-## 🚀 Project Structure
+The website supports two languages:
+- **Spanish (es)** - Default language
+- **English (en)**
 
-Inside of your Astro project, you'll see the following folders and files:
+Routes are structured as:
+- `/es/` - Spanish pages
+- `/en/` - English pages
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+## 🎨 Design System
+
+The project uses a custom color palette:
+- Primary: `#540D6E` (Dark purple)
+- Secondary: `#EE4266` (Pink)
+- Accent: `#FFD23F` (Yellow)
+- Success: `#3BCEAC` (Teal)
+- Info: `#03QD69` (Light green)
+
+## 📁 Project Structure
+
+```
+src/
+├── components/
+│   ├── common/           # Shared components
+│   ├── navigation/       # Navigation components
+│   └── sections/         # Page section components
+├── layouts/
+│   └── Layout.astro      # Main layout
+├── pages/
+│   ├── en/              # English pages
+│   └── es/              # Spanish pages
+├── i18n/
+│   ├── ui.ts            # Translation keys
+│   └── utils.ts         # i18n utilities
+├── styles/
+│   ├── global.css       # Global styles and CSS variables
+│   └── components/      # Component-specific styles
+└── assets/
+    └── images/          # Image assets
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 🛠 Development
 
-## 🧞 Commands
+- **Framework**: Astro 5.11.1
+- **Package Manager**: pnpm (exclusively enforced)
+- **Styling**: CSS with Custom Properties
+- **TypeScript**: Strict mode with enhanced type checking
+- **Internationalization**: Built-in Astro i18n
 
-All commands are run from the root of the project, from a terminal:
+### TypeScript Configuration
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+This project uses **strict TypeScript** configuration with:
+- No implicit `any` types allowed
+- Unused variables/parameters flagged as errors
+- Exact optional property types
+- Strict null checks and function types
+- Enhanced type safety with additional compiler options
 
-## 👀 Want to learn more?
+📖 **See [TypeScript Patterns Guide](docs/typescript-patterns.md)** for detailed coding standards and patterns.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 📝 Available Scripts
+
+```bash
+pnpm run dev        # Start development server
+pnpm run build      # Build for production
+pnpm run preview    # Preview production build
+pnpm run astro      # Run Astro CLI commands
+pnpm run type-check # Run TypeScript type checking
+pnpm run lint       # Run ESLint for code quality
+pnpm run lint:fix   # Run ESLint and fix issues automatically
+```
+
+## 🎭 About Compañía de Títeres Anarama
+
+Founded by Lic. Adriana Pacheco Hernández, this puppet theater company specializes in educational shows for children, particularly reaching underprivileged communities in Chihuahua, Mexico.

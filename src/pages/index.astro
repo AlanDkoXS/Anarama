@@ -1,0 +1,58 @@
+---
+// Root index page - redirects to appropriate language
+// This handles the base URL and redirects to the user's preferred language
+---
+
+<script>
+  // Client-side language detection and redirect
+  function detectAndRedirect() {
+    // Check if user has a stored language preference
+    const storedLang = localStorage.getItem('preferred-language');
+    
+    if (storedLang && (storedLang === 'es' || storedLang === 'en')) {
+      window.location.href = `/${storedLang}/`;
+      return;
+    }
+    
+    // Detect browser language
+    const browserLang = navigator.language || (navigator.languages && navigator.languages[0]);
+    const langCode = browserLang?.toLowerCase().startsWith('es') ? 'es' : 'en';
+    
+    // Default to Spanish for Mexican company
+    const targetLang = langCode === 'en' ? 'en' : 'es';
+    
+    // Store preference and redirect
+    localStorage.setItem('preferred-language', targetLang);
+    window.location.href = `/${targetLang}/`;
+  }
+  
+  // Execute immediately
+  detectAndRedirect();
+</script>
+
+<!-- Fallback for users with JavaScript disabled -->
+<noscript>
+  <meta http-equiv="refresh" content="0; url=/es/" />
+</noscript>
+
+<!-- Basic HTML for SEO and accessibility -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compañía de Títeres Anarama</title>
+  <meta name="description" content="Compañía de Títeres Anarama - Educational puppet shows for children">
+</head>
+<body>
+  <div style="text-align: center; padding: 2rem; font-family: system-ui, sans-serif;">
+    <h1>Compañía de Títeres Anarama</h1>
+    <p>Redirecting to your preferred language...</p>
+    <p>Redirigiendo a tu idioma preferido...</p>
+    <p>
+      <a href="/es/">Español</a> | 
+      <a href="/en/">English</a>
+    </p>
+  </div>
+</body>
+</html>

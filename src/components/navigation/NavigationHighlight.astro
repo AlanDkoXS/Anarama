@@ -1,0 +1,43 @@
+---
+// Component to handle active navigation highlighting
+// This works in conjunction with the main Navigation component
+---
+
+<script>
+  function updateNavigationHighlight(): void {
+    // Get current route from document
+    const currentRoute = document.documentElement.getAttribute('data-current-route');
+    
+    if (!currentRoute) return;
+
+    // Update navigation links
+    const navLinks = document.querySelectorAll('.nav-link[data-route-key]');
+    
+    navLinks.forEach((link) => {
+      const linkRoute = link.getAttribute('data-route-key');
+      const isActive = linkRoute === currentRoute;
+      
+      // Update classes and attributes
+      link.classList.toggle('active', isActive);
+      
+      if (isActive) {
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    });
+  }
+
+  // Run on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateNavigationHighlight);
+  } else {
+    updateNavigationHighlight();
+  }
+
+  // Re-run after view transitions
+  document.addEventListener('astro:after-swap', updateNavigationHighlight);
+  
+  // Also run when route data is updated
+  document.addEventListener('route-updated', updateNavigationHighlight);
+</script>
