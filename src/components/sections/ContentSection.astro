@@ -1,0 +1,156 @@
+---
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  backgroundColor?: 'primary' | 'secondary' | 'transparent';
+  padding?: 'small' | 'medium' | 'large';
+  textAlign?: 'left' | 'center' | 'right';
+  maxWidth?: string;
+  className?: string;
+}
+
+const {
+  title,
+  subtitle,
+  backgroundColor = 'transparent',
+  padding = 'medium',
+  textAlign = 'center',
+  maxWidth = '1200px',
+  className = '',
+} = Astro.props;
+
+const bgClass = backgroundColor === 'primary' ? 'bg-primary' : 
+               backgroundColor === 'secondary' ? 'bg-secondary' : '';
+
+const paddingClass = padding === 'small' ? 'padding-small' :
+                    padding === 'large' ? 'padding-large' : 'padding-medium';
+---
+
+<section class={`content-section ${bgClass} ${paddingClass} ${className}`}>
+  <div class="content-container" style={`max-width: ${maxWidth}; text-align: ${textAlign};`}>
+    {title && <h2 class="content-title">{title}</h2>}
+    {subtitle && <p class="content-subtitle">{subtitle}</p>}
+    
+    <div class="content-body">
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Content Section - Mobile First */
+  .content-section {
+    width: 100%;
+  }
+
+  .content-container {
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .content-title {
+    font-size: 1.5rem; /* Mobile: 24px */
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+  }
+
+  .content-subtitle {
+    font-size: 1rem; /* Mobile: 16px */
+    margin-bottom: 2rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .content-body {
+    width: 100%;
+  }
+
+  /* Background variations */
+  .bg-primary {
+    background: var(--bg-primary);
+  }
+
+  .bg-secondary {
+    background: var(--bg-secondary);
+  }
+
+  /* Padding variations - Mobile First */
+  .padding-small {
+    padding: 1rem 0;
+  }
+
+  .padding-medium {
+    padding: 2rem 0;
+  }
+
+  .padding-large {
+    padding: 3rem 0;
+  }
+
+  /* Tablet styles */
+  @media (min-width: 768px) {
+    .content-title {
+      font-size: 2rem; /* Tablet: 32px */
+    }
+
+    .content-subtitle {
+      font-size: 1.125rem; /* Tablet: 18px */
+      margin-bottom: 3rem;
+    }
+
+    .padding-small {
+      padding: 1.5rem 0;
+    }
+
+    .padding-medium {
+      padding: 3rem 0;
+    }
+
+    .padding-large {
+      padding: 4rem 0;
+    }
+  }
+
+  /* Desktop styles */
+  @media (min-width: 1024px) {
+    .content-container {
+      padding: 0 2rem;
+    }
+
+    .content-title {
+      font-size: 2.25rem; /* Desktop: 36px */
+    }
+
+    .content-subtitle {
+      font-size: 1.25rem; /* Desktop: 20px */
+    }
+
+    .padding-small {
+      padding: 2rem 0;
+    }
+
+    .padding-medium {
+      padding: 4rem 0;
+    }
+
+    .padding-large {
+      padding: 5rem 0;
+    }
+  }
+
+  /* Text alignment utilities */
+  .content-container[style*="text-align: left"] .content-title,
+  .content-container[style*="text-align: left"] .content-subtitle {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  .content-container[style*="text-align: right"] .content-title,
+  .content-container[style*="text-align: right"] .content-subtitle {
+    margin-left: auto;
+    margin-right: 0;
+  }
+</style>

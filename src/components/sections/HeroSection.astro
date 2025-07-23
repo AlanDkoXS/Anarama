@@ -1,0 +1,256 @@
+---
+export interface Props {
+  title: string;
+  subtitle?: string;
+  ctaPrimary?: {
+    text: string;
+    href: string;
+  };
+  ctaSecondary?: {
+    text: string;
+    href: string;
+  };
+  backgroundType?: 'gradient' | 'solid' | 'image';
+  backgroundColor?: string;
+  textAlign?: 'left' | 'center' | 'right';
+  minHeight?: string;
+  showVisual?: boolean;
+  visualContent?: string;
+  className?: string;
+}
+
+const {
+  title,
+  subtitle,
+  ctaPrimary,
+  ctaSecondary,
+  backgroundType = 'gradient',
+  backgroundColor,
+  textAlign = 'center',
+  minHeight = '50vh',
+  showVisual = false,
+  visualContent = '🎭',
+  className = '',
+} = Astro.props;
+
+const backgroundStyle = backgroundType === 'gradient' 
+  ? 'linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%)'
+  : backgroundType === 'solid' 
+    ? backgroundColor || 'var(--color-primary)'
+    : 'none';
+---
+
+<section class={`hero-section ${className}`} style={`background: ${backgroundStyle}; min-height: ${minHeight};`}>
+  <div class="hero-container">
+    <div class="hero-content" style={`text-align: ${textAlign};`}>
+      <h1 class="hero-title">{title}</h1>
+      {subtitle && <p class="hero-subtitle">{subtitle}</p>}
+      
+      {(ctaPrimary || ctaSecondary) && (
+        <div class="hero-actions">
+          {ctaPrimary && (
+            <a href={ctaPrimary.href} class="cta-button primary">
+              {ctaPrimary.text}
+            </a>
+          )}
+          {ctaSecondary && (
+            <a href={ctaSecondary.href} class="cta-button secondary">
+              {ctaSecondary.text}
+            </a>
+          )}
+        </div>
+      )}
+    </div>
+    
+    {showVisual && (
+      <div class="hero-visual">
+        <div class="hero-visual-content">
+          {visualContent}
+        </div>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  /* Hero Section - Mobile First */
+  .hero-section {
+    display: flex;
+    align-items: center;
+    color: white;
+    margin: 0 -1rem 2rem -1rem;
+    padding: 2rem 0;
+    view-transition-name: hero;
+  }
+
+  .hero-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    align-items: center;
+  }
+
+  .hero-content {
+    padding: 0 1rem;
+  }
+
+  .hero-title {
+    font-size: 1.875rem; /* Mobile: 30px */
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem; /* Mobile: 16px */
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+    line-height: 1.4;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-visual-content {
+    font-size: 6rem;
+    opacity: 0.8;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  /* CTA Buttons */
+  .cta-button {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    text-align: center;
+    min-width: 150px;
+  }
+
+  .cta-button.primary {
+    background: var(--color-accent);
+    color: var(--color-primary);
+    border: 2px solid var(--color-accent);
+  }
+
+  .cta-button.primary:hover {
+    background: transparent;
+    color: var(--color-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 210, 63, 0.3);
+  }
+
+  .cta-button.secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+
+  .cta-button.secondary:hover {
+    background: white;
+    color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+
+  /* Tablet styles */
+  @media (min-width: 768px) {
+    .hero-section {
+      margin: 0 -2rem 3rem -2rem;
+      padding: 3rem 2rem;
+      min-height: 60vh;
+    }
+
+    .hero-container {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .hero-content[style*="text-align: left"] {
+      text-align: left;
+    }
+
+    .hero-content[style*="text-align: left"] .hero-actions {
+      align-items: flex-start;
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+
+    .hero-title {
+      font-size: 2.5rem; /* Tablet: 40px */
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem; /* Tablet: 20px */
+      margin-bottom: 2rem;
+    }
+
+    .hero-visual-content {
+      font-size: 8rem;
+    }
+  }
+
+  /* Desktop styles */
+  @media (min-width: 1024px) {
+    .hero-section {
+      margin: 0 -3rem 4rem -3rem;
+      padding: 4rem 3rem;
+      min-height: 70vh;
+    }
+
+    .hero-title {
+      font-size: 3rem; /* Desktop: 48px */
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem; /* Desktop: 24px */
+    }
+
+    .hero-visual-content {
+      font-size: 10rem;
+    }
+  }
+
+  /* Large Desktop styles */
+  @media (min-width: 1280px) {
+    .hero-section {
+      padding: 5rem 3rem;
+    }
+
+    .hero-title {
+      font-size: 3.5rem; /* Large Desktop: 56px */
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-visual-content {
+      animation: none;
+    }
+
+    .cta-button:hover {
+      transform: none;
+    }
+  }
+</style>

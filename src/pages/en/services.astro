@@ -207,9 +207,9 @@ const t = useTranslations('en');
 <style>
   @import "../../styles/pages.css";
 
-  /* Services-specific styles */
+  /* Services-specific styles - Mobile First */
   .main-services {
-    padding: 4rem 0;
+    padding: 2rem 0;
   }
 
   .services-grid {
@@ -265,9 +265,9 @@ const t = useTranslations('en');
     border-bottom: 1px solid var(--bg-secondary);
   }
 
-  /* Themes Section */
+  /* Themes Section - Mobile First */
   .themes-section {
-    padding: 4rem 0;
+    padding: 2rem 0;
     background: var(--bg-secondary);
   }
 
@@ -307,9 +307,9 @@ const t = useTranslations('en');
     line-height: 1.5;
   }
 
-  /* Audiences Section */
+  /* Audiences Section - Mobile First */
   .audiences-section {
-    padding: 4rem 0;
+    padding: 2rem 0;
   }
 
   .audiences-grid {
@@ -347,9 +347,9 @@ const t = useTranslations('en');
     line-height: 1.5;
   }
 
-  /* Process Section */
+  /* Process Section - Mobile First */
   .process-section {
-    padding: 4rem 0;
+    padding: 2rem 0;
     background: var(--bg-secondary);
   }
 
@@ -395,6 +395,13 @@ const t = useTranslations('en');
 
   /* Tablet styles */
   @media (min-width: 768px) {
+    .main-services,
+    .themes-section,
+    .audiences-section,
+    .process-section {
+      padding: 3rem 0;
+    }
+
     .services-grid {
       grid-template-columns: repeat(2, 1fr);
     }
@@ -418,6 +425,13 @@ const t = useTranslations('en');
 
   /* Desktop styles */
   @media (min-width: 1024px) {
+    .main-services,
+    .themes-section,
+    .audiences-section,
+    .process-section {
+      padding: 4rem 0;
+    }
+
     .services-grid {
       grid-template-columns: repeat(3, 1fr);
     }

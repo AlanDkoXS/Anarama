@@ -1,15 +1,15 @@
 /* Shared styles for pages */
 
-/* Hero Section */
+/* Hero Section - Mobile First */
 .hero {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
-  padding: 3rem 0;
+  gap: 1rem;
+  padding: 2rem 0;
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   color: white;
-  margin: 0 -1rem 3rem -1rem;
-  min-height: 60vh;
+  margin: 0 -1rem 2rem -1rem;
+  min-height: 50vh;
   align-items: center;
   view-transition-name: hero;
 }
@@ -24,15 +24,15 @@
 }
 
 .hero-title {
-  font-size: 2.5rem;
+  font-size: 1.875rem; /* Mobile: 30px */
   font-weight: 700;
   margin-bottom: 1rem;
   line-height: 1.2;
 }
 
 .hero-subtitle {
-  font-size: 1.25rem;
-  margin-bottom: 2rem;
+  font-size: 1rem; /* Mobile: 16px */
+  margin-bottom: 1.5rem;
   opacity: 0.9;
   line-height: 1.4;
 }
@@ -99,7 +99,7 @@
   transform: translateY(-2px);
 }
 
-/* Section Containers */
+/* Section Containers - Mobile First */
 .section-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -107,7 +107,7 @@
 }
 
 .section-title {
-  font-size: 2rem;
+  font-size: 1.5rem; /* Mobile: 24px */
   font-weight: 700;
   text-align: center;
   margin-bottom: 1rem;
@@ -115,32 +115,32 @@
 }
 
 .section-description {
-  font-size: 1.125rem;
+  font-size: 1rem; /* Mobile: 16px */
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem; /* Mobile: smaller margin */
   color: var(--text-secondary);
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
 }
 
-/* About Section */
+/* About Section - Mobile First */
 .about-section {
-  padding: 4rem 0;
+  padding: 2rem 0; /* Mobile: smaller padding */
   background: var(--bg-secondary);
 }
 
 .about-highlights {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
-  margin-top: 3rem;
+  gap: 1.5rem; /* Mobile: smaller gap */
+  margin-top: 2rem; /* Mobile: smaller margin */
   view-transition-name: card-grid;
 }
 
 .highlight-card {
   background: var(--bg-primary);
-  padding: 2rem;
+  padding: 1.5rem; /* Mobile: smaller padding */
   border-radius: 1rem;
   text-align: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -168,16 +168,16 @@
   line-height: 1.5;
 }
 
-/* Services Section */
+/* Services Section - Mobile First */
 .services-section {
-  padding: 4rem 0;
+  padding: 2rem 0; /* Mobile: smaller padding */
 }
 
 .services-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
-  margin-bottom: 3rem;
+  gap: 1.5rem; /* Mobile: smaller gap */
+  margin-bottom: 2rem; /* Mobile: smaller margin */
   view-transition-name: card-grid;
 }
 
@@ -239,7 +239,9 @@
   .hero {
     grid-template-columns: 1fr 1fr;
     margin: 0 -2rem 3rem -2rem;
-    padding: 4rem 2rem;
+    padding: 3rem 2rem;
+    gap: 2rem;
+    min-height: 60vh;
   }
 
   .hero-content {
@@ -252,19 +254,42 @@
   }
 
   .hero-title {
-    font-size: 3rem;
+    font-size: 2.5rem; /* Tablet: 40px */
   }
 
   .hero-subtitle {
-    font-size: 1.5rem;
+    font-size: 1.25rem; /* Tablet: 20px */
+    margin-bottom: 2rem;
+  }
+
+  .section-title {
+    font-size: 2rem; /* Tablet: 32px */
+  }
+
+  .section-description {
+    font-size: 1.125rem; /* Tablet: 18px */
+    margin-bottom: 3rem;
+  }
+
+  .about-section,
+  .services-section {
+    padding: 3rem 0;
   }
 
   .about-highlights {
     grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .highlight-card {
+    padding: 2rem;
   }
 
   .services-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
   }
 
   .contact-actions {
@@ -277,11 +302,29 @@
 @media (min-width: 1024px) {
   .hero {
     margin: 0 -3rem 4rem -3rem;
-    padding: 5rem 3rem;
+    padding: 4rem 3rem;
+    min-height: 70vh;
   }
 
   .hero-title {
-    font-size: 3.5rem;
+    font-size: 3rem; /* Desktop: 48px */
+  }
+
+  .hero-subtitle {
+    font-size: 1.5rem; /* Desktop: 24px */
+  }
+
+  .section-title {
+    font-size: 2.25rem; /* Desktop: 36px */
+  }
+
+  .section-description {
+    font-size: 1.25rem; /* Desktop: 20px */
+  }
+
+  .about-section,
+  .services-section {
+    padding: 4rem 0;
   }
 
   .services-grid {
@@ -290,6 +333,22 @@
 
   .section-container {
     padding: 0 2rem;
+  }
+}
+
+/* Large Desktop styles */
+@media (min-width: 1280px) {
+  .hero-title {
+    font-size: 3.5rem; /* Large Desktop: 56px */
+  }
+
+  .hero {
+    padding: 5rem 3rem;
+  }
+
+  .about-section,
+  .services-section {
+    padding: 5rem 0;
   }
 }
 
